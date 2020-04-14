@@ -1,0 +1,65 @@
+//BinaryIndexedTree
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define S second
+#define F first
+#define pb push_back
+#define BaChao     ios_base::sync_with_stdio(false);cin.tie(NULL);
+int tree[100007];
+const int mxx=2*1e5;
+void update(int idx, int x, int n)
+{
+    while(idx<=n)
+    {
+        tree[idx]+=x;
+        idx += idx & (-idx);
+    }
+}
+int query(int idx)
+{
+    int sum=0;
+    while(idx>0)
+    {
+        sum+=tree[idx];
+        idx -= idx & (-idx);
+    }
+    return sum;
+}
+int main()
+{
+    BaChao
+ 
+    int i,j,t,x,y,cs=1,task,p,q,k,sum,c,n,b;
+    scanf("%d",&t);
+    while(t--)
+    {
+        memset(tree,0,sizeof(tree));
+        scanf("%d %d",&n,&task);
+        int a[n+5];
+        for(i=1; i<=n; i++)
+        {
+            scanf("%d",&a[i]);
+            update(i, a[i],n);
+        }
+
+                scanf("%d",&y);
+                y++;
+                update(y,-a[y],n);
+                printf("%d\n",a[y]);
+                a[y]=0;
+                scanf("%d %d",&p,&q);
+                p++;
+                a[p] += q;
+                update(p,q,n);
+                scanf("%d %d",&p,&q);
+                p++, q++;
+                printf("%d\n",query(q)-query(p-1));
+ 
+            
+        
+    }
+ 
+ 
+ 
+}
